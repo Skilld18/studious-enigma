@@ -13,9 +13,9 @@ class User:
         cur =  conn.cursor()
         data = (str(self.key),str(questionKey),answerString)
         cur.execute("""
-        INSERT INTO answers(key, questionkey, userkey, answer)
+        INSERT INTO answers(key, questionKey, userKey, answer)
         VALUES (DEFAULT ,%s,%s,%s)
-        ON CONFLICT (questionkey, userkey) DO UPDATE SET answer = EXCLUDED.answer;
+        ON CONFLICT (questionKey, userKey) DO UPDATE SET answer = EXCLUDED.answer;
         """, data)
         conn.commit()
 

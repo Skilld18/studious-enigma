@@ -1,17 +1,8 @@
 #!/usr/bin/python3
-import group
-import user
+import question
 
-introToProg = group.Group()
-ann = user.User("Alice")
-introToProg.add(ann)
-bob = user.User("Bob")
-introToProg.add(bob)
 
-for member in introToProg.members:
-    print(member.name)
-
-ann.answerQuestion(3, 'newqans4')
+print(question.search('ipsum')[0].long)
 
 
 
