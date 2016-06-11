@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+import utils
 # this class will have to be expanded by parsing out the tags field
 
 class Question:
@@ -21,5 +21,15 @@ class Question:
 
 
 # Helpers
+def get_all():
+    return utils.get_all_rows("questions", Question)
+
+def get(criteria, questions):
+    return utils.get_items(criteria, questions)
+
+def by_key(key):
+    for question in get(lambda x: x.key == key, get_all()):
+        return question
+
 
 # Criteria

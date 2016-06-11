@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+
+
 import question
 import user
 import utils
@@ -11,8 +13,7 @@ class Answer:
     answer = ""
 
     def __str__(self):
-        return utils.get_by_key(self.questionKey,utils.get_all_rows("questions", question.Question)).short + ", " + \
-            self.answer + ", " + utils.get_by_key(self.userKey, utils.get_all_rows("users", user.User)).name
+        return question.by_key(self.questionKey).short + ", " + self.answer + ", " + user.by_key(self.userKey).name
 
     def __init__(self, key, questionKey, userKey, answer):
         self.key = key
@@ -21,23 +22,26 @@ class Answer:
         self.answer = answer
 
 
-def get_all_answers():
+# Helpers
+def get_all():
     return utils.get_all_rows("answers", Answer)
 
-def get_answers(criteria, answers):
-    return filter(criteria, answers)
+def get(criteria, answers):
+    return utils.get_items(criteria, answers)
 
+def by_key(key):
+    return get(lambda x: x.key == key, get_all())
 
-# Helpers
 
 def get_correct_answers(answers):
-    return get_answers(lambda x: correct(x), answers)
+    return get(lambda x: correct(x), answers)
+
 
 
 # Criteria examples
-#fix get all questions here
+# Fix get all questions here
 def correct(answer):
-    return answer.answer == question.get_question_by_key(question.get_all_questions(), answer.key)
+    return answer.answer == question.by_key(answer.questionKey).answer
 
 
 def correct_answers(answer, questions):

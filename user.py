@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 import utils
 
 
@@ -35,9 +36,16 @@ class User:
         self.name = name
 
 
-def get_all_users():
+def get_all():
     return utils.get_all_rows("users", User)
 
-def get_users(criteria, users):
-    return filter(criteria, users)
+def get(criteria, users):
+    return utils.get_items(criteria, users)
 
+def by_key(key):
+    for user in get(lambda x: x.key == key, get_all()):
+        return user
+
+
+def my_answers(userKey, all_answers):
+    return get(lambda x: x.userKey == userKey, all_answers)

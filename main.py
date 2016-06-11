@@ -1,20 +1,18 @@
 #!/usr/bin/python3
 
 import answer
-import data
-import question
 import user
-import utils
 
-data.qs = utils.get_all_rows("questions", question.Question)
-data.ans = utils.get_all_rows("answers", answer.Answer)
-data.users = utils.get_all_rows("users", user.User)
+print("Correct answers")
+for ans in answer.get_correct_answers(answer.get_all()):
+    print(ans)
 
-for u in data.users:
-    print(u.name)
-for u in data.ans:
-    print(u)
+print("\nUser answers")
+for ans in (user.my_answers(1, answer.get_all())):
+    print(ans)
 
-#correct qs from one user
+print("Correct from a given user")
 
+for ans in answer.get_correct_answers(user.my_answers(1, answer.get_all())):
+    print(ans)
 
