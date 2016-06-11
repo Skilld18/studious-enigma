@@ -19,20 +19,13 @@ class Question:
 
 
 def get_all_questions():
-    questions = []
-    data = utils.sql('SELECT * FROM questions')
-    for row in data:
-        questions.append(Question(*row))
-    return questions
+    return utils.get_all_rows("questions", Question)
 
-def search(string):
-    string = string.lower()
-    results = []
-    for question in get_all_questions():
-        fields = [question.short, question.long, question.tags]
-        for field in fields:
-            if field is not None and string in field:
-                results.append(question)
-    return results
+def get_questions(criteria):
+    return filter(criteria, get_all_questions())
+
+# Example criteria function
+def search(question, string):
+    return any(map(lambda x: x is not None and string in x, [question.short, question.long, question.tags]))
 
 
