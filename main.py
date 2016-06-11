@@ -1,19 +1,20 @@
 #!/usr/bin/python3
+
 import answer
+import data
 import question
+import user
 import utils
 
-for x in utils.get_items(utils.get_all_rows("questions", question.Question), lambda y: "9" in y.short):
-    print(x.short)
+data.qs = utils.get_all_rows("questions", question.Question)
+data.ans = utils.get_all_rows("answers", answer.Answer)
+data.users = utils.get_all_rows("users", user.User)
 
-for q in question.get_questions(lambda x: question.search(x, "2")):
-    print(q.long)
-
+for u in data.users:
+    print(u.name)
+for u in data.ans:
+    print(u)
 
 #correct qs from one user
-start = utils.get_items(utils.get_all_rows("answers", answer.Answer), lambda y : y.userKey == 1)
-cont = utils.get_items(start, lambda x: x.answer == question.get_question_answer(x.questionKey))
-for line in cont:
-    print(line.answer)
 
 

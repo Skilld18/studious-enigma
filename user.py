@@ -3,10 +3,11 @@ import utils
 
 
 class User:
-
     key = 1
     name = "UsEr"
-    answers = []
+
+    def __str__(self):
+        return self.name
 
     def answerQuestion(self, questionKey, answerString):
         conn = utils.getConn()
@@ -29,5 +30,14 @@ class User:
         self.answers.remove(1)
 
 
-    def __init__(self, name):
+    def __init__(self, key, name):
+        self.key = key
         self.name = name
+
+
+def get_all_users():
+    return utils.get_all_rows("users", User)
+
+def get_users(criteria, users):
+    return filter(criteria, users)
+

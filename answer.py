@@ -1,12 +1,18 @@
 #!/usr/bin/python3
-
+import question
+import user
 import utils
+
 
 class Answer:
     key = 0
     questionKey = 0
     userKey = 0
     answer = ""
+
+    def __str__(self):
+        return utils.get_by_key(self.questionKey,utils.get_all_rows("questions", question.Question)).short + ", " + \
+            self.answer + ", " + utils.get_by_key(self.userKey, utils.get_all_rows("users", user.User)).name
 
     def __init__(self, key, questionKey, userKey, answer):
         self.key = key
@@ -16,18 +22,27 @@ class Answer:
 
 
 def get_all_answers():
-    answers = []
-    data = utils.sql('SELECT * FROM answers')
-    for row in data:
-        answers.append(Answer(*row))
-    return answers
+    return utils.get_all_rows("answers", Answer)
 
-def get_user_answers(userKey):
-    results = []
-    for answer in get_all_answers():
-        if answer.userKey == userKey:
-            results.append(answer)
-    return results
+def get_answers(criteria, answers):
+    return filter(criteria, answers)
+
+
+# Helpers
+
+def get_correct_answers(answers):
+    return get_answers(lambda x: correct(x), answers)
+
+
+# Criteria examples
+#fix get all questions here
+def correct(answer):
+    return answer.answer == question.get_question_by_key(question.get_all_questions(), answer.key)
+
+
+def correct_answers(answer, questions):
+    return answer.answer != question.get_questions(lambda x: question.get_question(x, answer.questionKey), question.get_all_questions()).answer
+
 
 def get_question_answers(questionKey):
     results = []

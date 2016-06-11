@@ -1,14 +1,16 @@
 #!/usr/bin/python3
 
-import utils
-
 # this class will have to be expanded by parsing out the tags field
+
 class Question:
     key = 0
     short = "short"
     long = "long"
     answer = "answer"
     tags = "tags"
+
+    def __str__(self):
+        return self.short
 
     def __init__(self, key, short, long, answer, tags):
         self.key = key
@@ -18,20 +20,6 @@ class Question:
         self.tags = tags
 
 
-def get_all_questions():
-    return utils.get_all_rows("questions", Question)
+# Helpers
 
-def get_questions(criteria):
-    return filter(criteria, utils.get_all_rows("questions", Question))
-
-def get_question_answer(key):
-    for x in get_all_questions():
-        if key == x.key:
-            return x.answer
-
-
-# Example criteria function
-def search(question, string):
-    return any(map(lambda x: x is not None and string in x, [question.short, question.long, question.tags]))
-
-
+# Criteria
