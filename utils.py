@@ -13,5 +13,5 @@ def get_all_rows(database, dataType):
     return map(lambda x: dataType(*x), sql("SELECT * FROM " + database))
 
 def get_items(all_items, criteria):
-    return filter(criteria, all_items())
+    return filter(criteria, all_items)
 

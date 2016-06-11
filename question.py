@@ -22,7 +22,13 @@ def get_all_questions():
     return utils.get_all_rows("questions", Question)
 
 def get_questions(criteria):
-    return filter(criteria, get_all_questions())
+    return filter(criteria, utils.get_all_rows("questions", Question))
+
+def get_question_answer(key):
+    for x in get_all_questions():
+        if key == x.key:
+            return x.answer
+
 
 # Example criteria function
 def search(question, string):
