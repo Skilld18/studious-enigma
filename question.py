@@ -2,12 +2,19 @@
 import utils
 # this class will have to be expanded by parsing out the tags field
 
+
 class Question:
     key = 0
     short = "short"
     long = "long"
     answer = "answer"
     tags = "tags"
+
+    def __contains__(self, item):
+        fields = [self.short, self.long, self.tags]
+        for field in fields:
+            if field is not None and item in field:
+                return True
 
     def __str__(self):
         return self.short
@@ -24,12 +31,16 @@ class Question:
 def get_all():
     return utils.get_all_rows("questions", Question)
 
+
 def get(criteria, questions):
     return utils.get_items(criteria, questions)
+
 
 def by_key(key):
     for question in get(lambda x: x.key == key, get_all()):
         return question
 
 
-# Criteria
+def search(string, answers):
+    return get(lambda x: string in x, answers)
+
