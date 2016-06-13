@@ -35,7 +35,7 @@ class Answer:
 # Helpers
 # This will need to be refactored not to call the db so much
 def get_all():
-    return utils.get_all_rows("answers", Answer)
+    return map(lambda x: Answer(*x), utils.sql("SELECT * FROM answers"))
 
 
 def get(criteria, answers):

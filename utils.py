@@ -17,8 +17,9 @@ def sql(query, data=None):
     return result
 
 
+# This may need to be placed in the implemented classes
 def get_all_rows(database, data_type):
-    return map(lambda x: data_type(*x), sql("SELECT * FROM " + database))
+    return map(lambda x: data_type(*x), sql("SELECT * FROM  " + database))
 
 
 def get_items(criteria, all_items):

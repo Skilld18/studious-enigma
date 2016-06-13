@@ -23,7 +23,7 @@ for ans in question.search("+ 9", question.get_all()):
     print(ans)
 
 # This shouldn't be directly using keys
-print("\nStudent 0 changes answer to question 1 to 42")
+print("\nStudent 1 changes answer to question 1 to 42")
 utils.update_answer(1, 1, "42")
 
 
