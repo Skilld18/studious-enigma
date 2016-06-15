@@ -1,19 +1,26 @@
 import psycopg2
 
+con = None
+cur = None
+
 
 def sql(query, data=None):
+    global con, cur
     result = []
-    # noinspection PyUnresolvedReferences
-    con = psycopg2.connect("dbname='postgres' user='postgres' host='159.203.6.218' port='5432' password='eightgravity'")
-    cur = con.cursor()
+    if not con:
+        con = psycopg2.connect(
+            "dbname='postgres'\
+            user='postgres'\
+            host='159.203.6.218'\
+            port='5432' \
+            password='eightgravity'")
+        cur = con.cursor()
     cur.execute(query, data)
     # Fix this
     if query[0:6].upper() == "SELECT":
         result = cur.fetchall()
     # Needed for upsert
     con.commit()
-    cur.close()
-    con.close()
     return result
 
 
