@@ -1,6 +1,10 @@
 #!/usr/bin/python3
+import copy
+
 import utils
 # this class will have to be expanded by parsing out the tags field
+
+all_questions = None
 
 
 class Question:
@@ -29,7 +33,10 @@ class Question:
 
 # Helpers
 def get_all():
-    return utils.get_all_rows("questions", Question)
+    global all_questions
+    if not all_questions:
+        all_questions = utils.get_all_rows("questions", Question)
+    return copy.deepcopy(all_questions)
 
 
 def get(criteria, questions):

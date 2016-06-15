@@ -1,8 +1,11 @@
 #!/usr/bin/python3
+import copy
 
 import question
 import user
 import utils
+
+all_answers = None
 
 
 class Answer:
@@ -33,9 +36,11 @@ class Answer:
 
 
 # Helpers
-# This will need to be refactored not to call the db so much
 def get_all():
-    return map(lambda x: Answer(*x), utils.sql("SELECT * FROM answers"))
+    global all_answers
+    if not all_answers:
+        all_answers = utils.get_all_rows("answers", Answer)
+    return copy.deepcopy(all_answers)
 
 
 def get(criteria, answers):

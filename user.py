@@ -1,6 +1,11 @@
 #!/usr/bin/python3
 
+import copy
+
 import utils
+
+# Stores all users
+all_users = None
 
 
 class User:
@@ -16,7 +21,10 @@ class User:
 
 
 def get_all():
-    return utils.get_all_rows("users", User)
+    global all_users
+    if not all_users:
+        all_users = utils.get_all_rows("users", User)
+    return copy.deepcopy(all_users)
 
 
 def get(criteria, users):
