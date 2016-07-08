@@ -11,7 +11,7 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
-import utils
+import version
 
 here = path.abspath(path.dirname(__file__))
 
@@ -20,13 +20,13 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name=utils.__name__,
+    name=version.__name__,
 
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version=utils.__version__,
+    version=version.__version__,
 
     description='A sample Python project',
     long_description=long_description,

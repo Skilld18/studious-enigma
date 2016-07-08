@@ -6,6 +6,7 @@ import answer
 import question
 import user
 import utils
+import version
 
 # get set of questions
 # if set contains one you can answer with next argument
@@ -20,7 +21,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     if args.version:
-        print(utils.__name__ + " version " + utils.__version__)
+        print(version.__name__ + " version " + version.__version__)
         exit(0)
 
     if args.zebra:
