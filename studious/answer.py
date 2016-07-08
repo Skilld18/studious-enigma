@@ -2,9 +2,9 @@
 
 import copy
 
-import question
-import user
-import utils
+from studious import question
+from studious import user
+from studious import utils
 
 all_answers = None
 

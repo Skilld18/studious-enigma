@@ -3,7 +3,7 @@
 
 import copy
 
-import utils
+from studious import utils
 
 # Stores all users
 all_users = None

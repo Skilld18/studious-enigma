@@ -2,11 +2,10 @@
 
 import argparse
 
-import answer
-import question
-import user
-import utils
-import version
+from studious import answer, version
+from studious import question
+from studious import user
+from studious import utils
 
 # get set of questions
 # if set contains one you can answer with next argument

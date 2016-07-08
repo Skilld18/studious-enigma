@@ -11,7 +11,7 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
-import version
+from studious import version
 
 here = path.abspath(path.dirname(__file__))
 
@@ -66,6 +66,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
+    # TODO:: This doesn't install a sql lib that is needed
     install_requires=['psycopg2'],
 
 )

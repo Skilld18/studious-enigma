@@ -2,7 +2,7 @@
 
 import copy
 
-import utils
+from studious import utils
 
 # this class will have to be expanded by parsing out the tags field
 
