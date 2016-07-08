@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+
 class Group:
     description = ""
     members = set()

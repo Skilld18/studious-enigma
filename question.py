@@ -1,7 +1,9 @@
 #!/usr/bin/python3
+
 import copy
 
 import utils
+
 # this class will have to be expanded by parsing out the tags field
 
 all_questions = None

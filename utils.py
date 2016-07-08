@@ -1,5 +1,8 @@
+#!/usr/bin/env python
 import psycopg2
 
+__name__ = "studious enigma"
+__version__ = "0.0.1"
 con = None
 cur = None
 
