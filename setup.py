@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """A setuptools based setup module.
 See:
 https://packaging.python.org/en/latest/distributing.html
