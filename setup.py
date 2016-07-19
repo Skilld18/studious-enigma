@@ -53,8 +53,6 @@ setup(
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
 
@@ -67,6 +65,6 @@ setup(
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     # TODO:: This doesn't install a sql lib that is needed
-    install_requires=['psycopg2'],
+    install_requires=['psycopg2', 'argparse'],
 
 )

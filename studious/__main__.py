@@ -2,14 +2,12 @@
 
 import argparse
 
-from studious import answer, version
-from studious import question
-from studious import user
-from studious import utils
-
 # get set of questions
 # if set contains one you can answer with next argument
 # if set contains one q with no answer stdin can answer
+# if stdin is file run code?
+
+from studious import answer, utils, question, user, version
 
 if __name__ == "__main__":
 

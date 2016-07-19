@@ -17,7 +17,7 @@ def sql(query, data=None):
             password='eightgravity'")
         cur = con.cursor()
     cur.execute(query, data)
-    # Fix this
+    # TODO:: Fix this
     if query[0:6].upper() == "SELECT":
         result = cur.fetchall()
     # Needed for upsert
