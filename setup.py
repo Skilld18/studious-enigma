@@ -8,10 +8,10 @@ https://github.com/pypa/sampleproject
 
 # Always prefer setuptools over distutils
 # noinspection PyUnresolvedReferences
-from setuptools import setup, find_packages
-# To use a consistent encoding
 from codecs import open
 from os import path
+
+from setuptools import setup
 
 from studious import version
 
@@ -68,5 +68,8 @@ setup(
     # https://packaging.python.org/en/latest/requirements.html
     # TODO:: This doesn't install a sql lib that is needed
     install_requires=['psycopg2', 'argparse'],
+    test_suite='nose.collector',
+    tests_require=['nose'],
+
 
 )
