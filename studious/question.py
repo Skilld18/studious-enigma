@@ -23,7 +23,7 @@ class Question:
                 return True
 
     def __str__(self):
-        return self.short
+        return str(self.key) + ". " + self.short
 
     def __init__(self, key, short, long, answer, tags):
         self.key = key
@@ -31,6 +31,10 @@ class Question:
         self.long = long
         self. answer = answer
         self.tags = tags
+
+    # TODO: add user answer
+    def verbose(self):
+        return str(self.key) + ". " + self.short + "\n" + str(self.long) + "\n" + str(self.tags)
 
 
 # Helpers
