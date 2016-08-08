@@ -2,7 +2,7 @@
 
 import argparse
 
-from studious import question, version
+from studious import answer, question, user, version
 
 if __name__ == "__main__":
 
@@ -21,14 +21,30 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.version:
         print(version.__name__ + " version " + version.__version__)
-        exit(0)
-    if args.question:
+
+    elif args.question:
         if args.verbose:
             for q in question.get_all():
                 print(q.verbose())
         else:
             for q in question.get_all():
                 print(q)
+
+    # TODO: mark correct
+    # TODO: aggregate report
+    elif args.answer:
+        for ans in (user.my_answers(1, answer.get_all())):
+            print(ans)
+
+    elif args.group:
+        print("Group")
+
+    elif args.user:
+        print("User")
+
+    else:
+        print("Help")
+
 
     # print("\nCorrect answers")
     # for ans in answer.get_correct_answers(answer.get_all()):
