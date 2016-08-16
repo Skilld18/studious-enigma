@@ -8,17 +8,24 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
 
+    # This sorts the type of command
     parser.add_argument("--version", default=False, action="store_true", help="prints the version number")
     parser.add_argument("-question", default=False, action="store_true", help="search questions")
     parser.add_argument("-answer", default=False, action="store_true", help="search answer")
     parser.add_argument("-user", default=False, action="store_true", help="search user")
     parser.add_argument("-group", default=False, action="store_true", help="search group")
 
+    # Any given command can filter the set of data it acts on
+    parser.add_argument('filter', nargs='?', default="")
+
+    # Optional input for command
+    parser.add_argument('input', nargs='?', default="")
+
+    # Verbose debug flag
     parser.add_argument("-verbose", default=False, action="store_true", help="verbose")
 
-    # Questions user has/hasn't answered
-
     args = parser.parse_args()
+
     if args.version:
         print(version.__name__ + " version " + version.__version__)
 
@@ -45,11 +52,6 @@ if __name__ == "__main__":
     else:
         print("Help")
 
-
-    # print("\nCorrect answers")
-    # for ans in answer.get_correct_answers(answer.get_all()):
-    #     print(ans)
-    #
     # print("\nUser answers")
     # for ans in (user.my_answers(1, answer.get_all())):
     #     print(ans)
