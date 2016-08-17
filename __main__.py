@@ -4,7 +4,7 @@ import os
 
 import argparse
 
-from studious import answer, question, user, version
+from studious import answer, question, user, utils, version
 
 if __name__ == "__main__":
 
@@ -18,7 +18,9 @@ if __name__ == "__main__":
         exit(0)
 
     config.read('.studiousrc')
-    print(config['USER']["name"])
+
+    if not user.exists(config['USER']["name"]):
+        user.add(config['USER']['name'])
 
     parser = argparse.ArgumentParser()
 
@@ -28,6 +30,7 @@ if __name__ == "__main__":
     parser.add_argument("-answer", default=False, action="store_true", help="search answer")
     parser.add_argument("-user", default=False, action="store_true", help="search user")
     parser.add_argument("-group", default=False, action="store_true", help="search group")
+    # if none of the above assume answering a question?
 
     # Any given command can filter the set of data it acts on
     parser.add_argument('filter', nargs='?', default="")
@@ -44,6 +47,14 @@ if __name__ == "__main__":
         print(version.__name__ + " version " + version.__version__)
 
     elif args.question:
+        #apply filter
+        if filter:
+            # TODO:: shorten this up
+            row = utils.sql("""SELECT * FROM USERS WHERE name = \'""" + config["USER"]['name'] + "\'")
+            # TODO:: get question and user by key
+            utils.update_answer(1, 1, args.input)
+
+
         if args.verbose:
             for q in question.get_all():
                 print(q.verbose())

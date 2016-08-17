@@ -21,6 +21,15 @@ class User:
         self.name = name
 
 
+def exists(username):
+    return (username,) in utils.sql("SELECT NAME FROM USERS")
+
+
+# TODO:: This is dangerous and why doesn't standard string sub work here?
+def add(username):
+    utils.sql("INSERT INTO USERS (name) VALUES (\'" + username + "\')", username)
+
+
 def get_all():
     global all_users
     if not all_users:
@@ -39,3 +48,7 @@ def by_key(key):
 
 def my_answers(user_key, all_answers):
     return get(lambda x: x.user_key == user_key, all_answers)
+
+
+def search(string, users):
+    return get(lambda x: x.contains(string), users)
