@@ -1,10 +1,24 @@
 #!/usr/bin/env python
+import configparser
+import os
 
 import argparse
 
 from studious import answer, question, user, version
 
 if __name__ == "__main__":
+
+    # Config File for username, password? and settings
+    config = configparser.ConfigParser()
+
+    if not os.path.isfile('.studiousrc'):
+        config['USER'] = {'name': input("Please enter a username: ")}
+        with open('.studiousrc', 'w') as configfile:
+            config.write(configfile)
+        exit(0)
+
+    config.read('.studiousrc')
+    print(config['USER']["name"])
 
     parser = argparse.ArgumentParser()
 
