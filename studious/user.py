@@ -22,12 +22,11 @@ class User:
 
 
 def exists(username):
-    return (username,) in utils.sql("SELECT NAME FROM USERS")
+    return utils.sql("""SELECT * FROM USERS WHERE NAME = %s""", [username])
 
 
-# TODO:: This is dangerous and why doesn't standard string sub work here?
 def add(username):
-    utils.sql("INSERT INTO USERS (name) VALUES (\'" + username + "\')", username)
+    utils.sql("INSERT INTO USERS (name) VALUES (%s)", [username])
 
 
 def get_all():

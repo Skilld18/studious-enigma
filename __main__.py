@@ -22,6 +22,8 @@ if __name__ == "__main__":
     if not user.exists(config['USER']["name"]):
         user.add(config['USER']['name'])
 
+    me = user.exists(config['USER']['name'])
+
     parser = argparse.ArgumentParser()
 
     # This sorts the type of command
@@ -47,13 +49,10 @@ if __name__ == "__main__":
         print(version.__name__ + " version " + version.__version__)
 
     elif args.question:
-        #apply filter
+        # apply filter
         if filter:
-            # TODO:: shorten this up
-            row = utils.sql("""SELECT * FROM USERS WHERE name = \'""" + config["USER"]['name'] + "\'")
             # TODO:: get question and user by key
-            utils.update_answer(1, 1, args.input)
-
+            utils.update_answer(int(args.filter), me[0][0], args.input)
 
         if args.verbose:
             for q in question.get_all():
@@ -77,19 +76,15 @@ if __name__ == "__main__":
     else:
         print("Help")
 
-    # print("\nUser answers")
-    # for ans in (user.my_answers(1, answer.get_all())):
-    #     print(ans)
-    #
-    # print("\nCorrect from a given user")
-    # for ans in answer.get_correct_answers(user.my_answers(1, answer.get_all())):
-    #     print(ans)
-    #
-    # print("\nQuestion contains string + 9")
-    # for ans in question.search("+ 9", question.get_all()):
-    #     print(ans)
-    #
-    # # This shouldn't be directly using keys
-    # print("\nStudent 1 changes answer to question 1 to 42")
-    # utils.update_answer(1, 1, "42")
-
+        # print("\nUser answers")
+        # for ans in (user.my_answers(1, answer.get_all())):
+        #     print(ans)
+        #
+        # print("\nCorrect from a given user")
+        # for ans in answer.get_correct_answers(user.my_answers(1, answer.get_all())):
+        #     print(ans)
+        #
+        # print("\nQuestion contains string + 9")
+        # for ans in question.search("+ 9", question.get_all()):
+        #     print(ans)
+        #

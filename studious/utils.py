@@ -40,8 +40,8 @@ def by_key(key, elements):
         return item
 
 
-def update_answer(answer_key, question_key, string):
-    data = (answer_key, question_key, string)
+def update_answer(question_key, user_key, string):
+    data = (question_key, user_key, string)
     sql("""
     INSERT INTO answers(key, questionKey, userKey, answer)
     VALUES (DEFAULT, %s, %s, %s)
