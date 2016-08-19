@@ -21,10 +21,6 @@ class User:
         self.name = name
 
 
-def exists(username):
-    return utils.sql("""SELECT * FROM USERS WHERE NAME = %s""", [username])
-
-
 def add(username):
     utils.sql("INSERT INTO USERS (name) VALUES (%s)", [username])
 
@@ -36,7 +32,7 @@ def get_all():
     return copy.deepcopy(all_users)
 
 
-def get(criteria, users):
+def get(criteria, users=get_all()):
     return utils.get_items(criteria, users)
 
 
@@ -45,9 +41,13 @@ def by_key(key):
         return question
 
 
-def my_answers(user_key, all_answers):
+def my_answers(user_key, all_answers=get_all()):
     return get(lambda x: x.user_key == user_key, all_answers)
 
 
-def search(string, users):
+def search(string, users=get_all()):
     return get(lambda x: x.contains(string), users)
+
+
+def exists(username, users=get_all()):
+    return get(lambda x: x.name == username, users)

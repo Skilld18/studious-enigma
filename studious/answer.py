@@ -42,7 +42,7 @@ def get_all():
     return copy.deepcopy(all_answers)
 
 
-def get(criteria, answers):
+def get(criteria, answers=get_all()):
     return utils.get_items(criteria, answers)
 
 

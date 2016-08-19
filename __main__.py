@@ -22,7 +22,7 @@ if __name__ == "__main__":
     if not user.exists(config['USER']["name"]):
         user.add(config['USER']['name'])
 
-    me = user.exists(config['USER']['name'])
+    me = user.exists(config['USER']['name']).__next__()
 
     parser = argparse.ArgumentParser()
 
@@ -35,10 +35,7 @@ if __name__ == "__main__":
     # if none of the above assume answering a question?
 
     # Any given command can filter the set of data it acts on
-    parser.add_argument('filter', nargs='?', default="")
-
-    # Optional input for command
-    parser.add_argument('input', nargs='?', default="")
+    parser.add_argument('commands', nargs='*', default="")
 
     # Verbose debug flag
     parser.add_argument("-verbose", default=False, action="store_true", help="verbose")
@@ -50,22 +47,22 @@ if __name__ == "__main__":
 
     elif args.question:
         # apply filter
-        if filter:
-            # TODO:: get question and user by key
-            utils.update_answer(int(args.filter), me[0][0], args.input)
-
-        if args.verbose:
-            for q in question.get_all():
-                print(q.verbose())
+        if len(args.commands)>=2:
+            # TODO:: return and print question
+            utils.update_answer(int(args.commands[0]), me.key, args.commands[1])
         else:
             for q in question.get_all():
                 print(q)
+            #TODO: print by filter
+
 
     # TODO: mark correct
     # TODO: aggregate report
     elif args.answer:
-        for ans in (user.my_answers(1, answer.get_all())):
-            print(ans)
+        for a in answer.get(lambda x: x.user_key == me.key):
+            print(a)
+        # for ans in answer.get(lambda x: x.user_key == me[0][0]):
+        #     print(ans)
 
     elif args.group:
         print("Group")
@@ -77,7 +74,7 @@ if __name__ == "__main__":
         print("Help")
 
         # print("\nUser answers")
-        # for ans in (user.my_answers(1, answer.get_all())):
+        # for ans in (user.my_answers(1, answer.get_all())):):):
         #     print(ans)
         #
         # print("\nCorrect from a given user")

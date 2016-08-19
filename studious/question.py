@@ -45,7 +45,7 @@ def get_all():
     return copy.deepcopy(all_questions)
 
 
-def get(criteria, questions):
+def get(criteria, questions=get_all()):
     return utils.get_items(criteria, questions)
 
 
@@ -54,6 +54,6 @@ def by_key(key):
         return question
 
 
-def search(string, answers):
+def search(string, answers=get_all()):
     return get(lambda x: string in x, answers)
 
