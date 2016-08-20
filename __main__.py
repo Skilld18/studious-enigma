@@ -47,22 +47,19 @@ if __name__ == "__main__":
 
     elif args.question:
         # apply filter
-        if len(args.commands)>=2:
+        if len(args.commands) >= 2:
             # TODO:: return and print question
             utils.update_answer(int(args.commands[0]), me.key, args.commands[1])
         else:
             for q in question.get_all():
                 print(q)
-            #TODO: print by filter
-
+                # TODO: print by filter
 
     # TODO: mark correct
     # TODO: aggregate report
     elif args.answer:
         for a in answer.get(lambda x: x.user_key == me.key):
-            print(a)
-        # for ans in answer.get(lambda x: x.user_key == me[0][0]):
-        #     print(ans)
+            print(a.__str__(args.verbose) + ("Correct" if a.correct() else "Incorrect"))
 
     elif args.group:
         print("Group")
@@ -73,10 +70,6 @@ if __name__ == "__main__":
     else:
         print("Help")
 
-        # print("\nUser answers")
-        # for ans in (user.my_answers(1, answer.get_all())):):):
-        #     print(ans)
-        #
         # print("\nCorrect from a given user")
         # for ans in answer.get_correct_answers(user.my_answers(1, answer.get_all())):
         #     print(ans)

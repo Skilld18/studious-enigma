@@ -2,7 +2,7 @@
 
 import copy
 
-from studious import question, user, utils
+from studious import question, utils
 
 all_answers = None
 
@@ -16,8 +16,10 @@ class Answer:
     def __contains__(self, item):
         return item in self.answer
 
-    def __str__(self):
-        return question.by_key(self.question_key).short + ", " + self.answer + ", " + user.by_key(self.user_key).name
+    def __str__(self, verbose=False):
+        if not verbose:
+            return question.by_key(self.question_key).short + ", " + self.answer + ", "
+        return str(self.key) + ", " + str(self.question_key) + ", " + str(self.user_key) + ", " + self.answer + ", "
 
     def __init__(self, key, question_key, user_key, answer):
         self.key = key
@@ -26,8 +28,12 @@ class Answer:
         self.answer = answer
 
     # Criteria examples
+    # TODO:: Need a better way to eval correct
     def correct(self):
         return self.answer == question.by_key(self.question_key).answer
+
+    def is_users(self, user):
+        return self.user_key == user
 
     # Operations
     def update(self):
@@ -50,14 +56,9 @@ def by_key(key):
     return get(lambda x: x.key == key, get_all())
 
 
-# More human helpers
-# Should maybe default answers to the whole set of the data
 def get_correct_answers(answers):
     return get(lambda x: x.correct(), answers)
 
 
 def search(string, answers):
     return get(lambda x: x.contains(string), answers)
-
-
-
