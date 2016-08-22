@@ -4,7 +4,7 @@ import os
 
 import argparse
 
-from studious import answer, question, user, utils, version
+from studious import answer, question, user, version
 
 if __name__ == "__main__":
 
@@ -42,14 +42,22 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    criteria = ""
+    if len(args.commands) > 0:
+        criteria = args.commands[0]
+
     if args.version:
         print(version.__name__ + " version " + version.__version__)
 
     elif args.question:
-        # apply filter
-        if len(args.commands) >= 2:
+        # Assuming key filter
+        if criteria.isdigit():
+            q = question.by_key(int(criteria))
+            if q:
+                print(q)
+
             # TODO:: return and print question
-            utils.update_answer(int(args.commands[0]), me.key, args.commands[1])
+            #utils.update_answer(int(args.commands[0]), me.key, args.commands[1])
         else:
             for q in question.get_all():
                 print(q)
@@ -68,13 +76,7 @@ if __name__ == "__main__":
         print("User")
 
     else:
-        print("Help")
-
-        # print("\nCorrect from a given user")
-        # for ans in answer.get_correct_answers(user.my_answers(1, answer.get_all())):
-        #     print(ans)
-        #
-        # print("\nQuestion contains string + 9")
-        # for ans in question.search("+ 9", question.get_all()):
-        #     print(ans)
-        #
+        # TODO: better instructions
+        print("To view answers use the -answer flag ex. \"python __main__.py -answers\"\n"
+              "To view questions use the -question flag ex. \"python __main__.py -questions\"\n"
+              "To answer questions use the question flag, a key and an answer ex. \"python __main__.py -questions 1 answer\"")

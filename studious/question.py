@@ -49,9 +49,12 @@ def get(criteria, questions=get_all()):
     return utils.get_items(criteria, questions)
 
 
+# TODO: is there a better way to do this with filters?
 def by_key(key):
-    for question in get(lambda x: x.key == key, get_all()):
-        return question
+    f = list(get(lambda x: x.key == key, get_all()))
+    if len(f) >= 1:
+        return f[0]
+    return None
 
 
 def search(string, answers=get_all()):
