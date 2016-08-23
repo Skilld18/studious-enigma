@@ -50,18 +50,24 @@ if __name__ == "__main__":
         print(version.__name__ + " version " + version.__version__)
 
     elif args.question:
-        # Assuming key filter
         if criteria.isdigit():
             q = question.by_key(int(criteria))
             if q:
                 print(q)
-
-            # TODO:: return and print question
-            #utils.update_answer(int(args.commands[0]), me.key, args.commands[1])
+            else:
+                print("No questions with key " + criteria)
         else:
-            for q in question.get_all():
+            # TODO: map this
+            # TODO: Add logic to answers
+            questions = question.get_all()
+            for item in criteria:
+                questions = question.get(lambda x: x.verbose().lower().__contains__(criteria.lower()), questions)
+            for q in questions:
                 print(q)
-                # TODO: print by filter
+
+
+
+
 
     # TODO: mark correct
     # TODO: aggregate report
@@ -73,10 +79,11 @@ if __name__ == "__main__":
         print("Group")
 
     elif args.user:
-        print("User")
+        print(me)
 
     else:
-        # TODO: better instructions
         print("To view answers use the -answer flag ex. \"python __main__.py -answers\"\n"
               "To view questions use the -question flag ex. \"python __main__.py -questions\"\n"
-              "To answer questions use the question flag, a key and an answer ex. \"python __main__.py -questions 1 answer\"")
+              "To answer questions use the question flag, select a question and an answer ex. \n"
+              "\"python __main__.py -questions 1 answer\n"
+              "\"python __main__.py -questions math nine answer\"")
