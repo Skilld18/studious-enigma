@@ -4,7 +4,7 @@ import os
 
 import argparse
 
-from studious import answer, question, user, version
+from studious import answer, question, user, utils, version
 
 if __name__ == "__main__":
 
@@ -57,15 +57,9 @@ if __name__ == "__main__":
             else:
                 print("No questions with key " + criteria)
         else:
-            # TODO: map this
             # TODO: Add logic to answers
-            questions = question.get_all()
-            for item in criteria:
-                questions = question.get(lambda x: x.verbose().lower().__contains__(criteria.lower()), questions)
-            for q in questions:
+            for q in utils.search(criteria, question.get_all()):
                 print(q)
-
-
 
 
 

@@ -40,6 +40,10 @@ def by_key(key, elements):
         return item
 
 
+def search(string, data):
+    return get_items(lambda x: string.lower() in x.verbose().lower(), data)
+
+
 def update_answer(question_key, user_key, string):
     data = (question_key, user_key, string)
     sql("""

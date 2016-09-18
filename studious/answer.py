@@ -59,6 +59,3 @@ def by_key(key):
 def get_correct_answers(answers):
     return get(lambda x: x.correct(), answers)
 
-
-def search(string, answers):
-    return get(lambda x: x.contains(string), answers)

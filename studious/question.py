@@ -57,6 +57,4 @@ def by_key(key):
     return None
 
 
-def search(string, answers=get_all()):
-    return get(lambda x: string in x, answers)
 
