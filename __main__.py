@@ -54,6 +54,9 @@ if __name__ == "__main__":
             q = question.by_key(int(criteria))
             if q:
                 print(q)
+                if len(args.commands) > 1:
+                    utils.update_answer(q.key, me.key, args.commands[1])
+                    print("My answer is " + str(args.commands[1]))
             else:
                 print("No questions with key " + criteria)
         else:
