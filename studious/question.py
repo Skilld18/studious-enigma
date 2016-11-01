@@ -25,6 +25,12 @@ class Question:
     def __str__(self):
         return str(self.key) + ". " + self.short
 
+    def __cmp__(self, other):
+        return self.key == other.key
+
+    def __lt__(self, other):
+        return self.key < other.key
+
     def __init__(self, key, short, long, answer, tags):
         self.key = key
         self. short = short
@@ -40,8 +46,7 @@ class Question:
 # Helpers
 def get_all():
     global all_questions
-    if not all_questions:
-        all_questions = utils.get_all_rows("questions", Question)
+    all_questions = utils.get_all_rows("questions", Question)
     return copy.deepcopy(all_questions)
 
 

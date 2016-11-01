@@ -70,6 +70,4 @@ setup(
     # https://packaging.python.org/en/latest/requirements.html
     # TODO:: This doesn't install a sql lib that is needed
     install_requires=['psycopg2', 'argparse'],
-    test_suite='nose.collector',
-    tests_require=['nose'],
 )

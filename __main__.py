@@ -1,10 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
+import argparse
 import configparser
 import os
 
-import argparse
-
-from studious import answer, question, user, utils, version
+from studious import answer, interactive, question, user, utils, version
 
 if __name__ == "__main__":
 
@@ -15,14 +14,17 @@ if __name__ == "__main__":
         config['USER'] = {'name': input("Please enter a username: ")}
         with open('.studiousrc', 'w') as configfile:
             config.write(configfile)
-        exit(0)
 
     config.read('.studiousrc')
 
     if not user.exists(config['USER']["name"]):
         user.add(config['USER']['name'])
 
-    me = user.exists(config['USER']['name']).__next__()
+    me = user.User(0, "Test")
+    name = config['USER']['name']
+    for e in user.exists(name):
+        me = e
+
 
     parser = argparse.ArgumentParser()
 
@@ -55,7 +57,7 @@ if __name__ == "__main__":
             if q:
                 print(q)
                 if len(args.commands) > 1:
-                    utils.update_answer(q.key, me.key, args.commands[1])
+                    utils.update_answer(1, 12, args.commands[1])
                     print("My answer is " + str(args.commands[1]))
             else:
                 print("No questions with key " + criteria)
@@ -79,8 +81,9 @@ if __name__ == "__main__":
         print(me)
 
     else:
-        print("To view answers use the -answer flag ex. \"python __main__.py -answers\"\n"
-              "To view questions use the -question flag ex. \"python __main__.py -questions\"\n"
-              "To answer questions use the question flag, select a question and an answer ex. \n"
-              "\"python __main__.py -questions 1 answer\n"
-              "\"python __main__.py -questions math nine answer\"")
+        interactive.interact(me)
+        # print("To view answers use the -answer flag ex. \"python __main__.py -answers\"\n"
+        #       "To view questions use the -question flag ex. \"python __main__.py -questions\"\n"
+        #       "To answer questions use the question flag, select a question and an answer ex. \n"
+        #       "\"python __main__.py -questions 1 answer\n"
+        #       "\"python __main__.py -questions math nine answer\"")
